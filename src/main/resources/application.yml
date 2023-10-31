@@ -1,0 +1,24 @@
+server:
+  port: '8080'
+spring:
+  profiles:
+    active: dev
+
+---
+config:
+  activate:
+    on-profile: dev
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost/cursojava?useSSL=false
+    password: ''
+  jpa:
+      generate-ddl: true
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        ddl-auto: update
+      show-sql: true
+
+
