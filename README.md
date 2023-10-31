@@ -1,5 +1,5 @@
 # SpringBoot_CRUD_v1
-Esta aplicación Java utiliza Spring Boot junto con Spring Security para la protección de rutas.
+Aplicación en Java utilizando Spring Boot junto con Spring Security para la protección de rutas.
 
 ## Contenido
 * Controladores
