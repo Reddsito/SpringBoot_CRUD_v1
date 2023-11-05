@@ -1,6 +1,8 @@
 package com.cursojava.curso.services.Implement;
 
-import com.cursojava.curso.Repository.UserRepository;
+
+import com.cursojava.curso.models.payload.UserResponse;
+import com.cursojava.curso.repository.UserRepository;
 import com.cursojava.curso.exceptions.ResourceNotFoundException;
 import com.cursojava.curso.models.dto.ResponseUserDto;
 import com.cursojava.curso.models.dto.UserDto;
@@ -21,8 +23,17 @@ public class UserImplService implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<User> findAllUsers() {
-        return (List<User>) userRepository.findAll();
+    public UserResponse findAllUsers() {
+        List<User> users = userRepository.findAll();
+
+        if(users.isEmpty()) {
+            throw new ResourceNotFoundException("users");
+        } else {
+            return UserResponse.builder()
+                    .response(users)
+                    .status_code(200)
+                    .build();
+        }
     }
 
     @Override
@@ -32,18 +43,28 @@ public class UserImplService implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public User findUserById(Integer id) {
-        return userRepository.findById(id).orElse(null);
+    public UserResponse findUserById(Integer id) {
+        User user = userRepository.findById(id).orElseThrow( () -> new ResourceNotFoundException("user", "id", id));
+
+        return UserResponse.builder()
+                    .response(user)
+                    .status_code(200)
+                    .build();
     }
 
     @Override
-    public Optional<ResponseUserDto> findByName(String name) {
-        return userRepository.findByName( name );
+    public UserResponse findByName(String name) {
+        ResponseUserDto user = userRepository.findByName(name).orElseThrow( () -> new ResourceNotFoundException("user", "name", name));
+
+        return UserResponse.builder()
+                .response(user)
+                .status_code(200)
+                .build();
     }
 
     @Override
     @Transactional
-    public User updateUser(UserDto userDto, Integer id) {
+    public UserResponse updateUser(UserDto userDto, Integer id) {
 
         if ( !existsById(id) ) {
             throw new ResourceNotFoundException("client", "id", id);
@@ -58,19 +79,25 @@ public class UserImplService implements UserService {
                 .phoneNumber(userDto.getPhoneNumber())
                 .password(userDto.getPassword())
                 .build();
-        return userRepository.save(user);
+        User userResponse = userRepository.save(user);
+        return UserResponse.builder()
+                .message("user updated")
+                .response(userResponse)
+                .status_code(200)
+                .build();
     }
 
     @Override
     @Transactional
-    public User deleteUser(Integer id) {
+    public UserResponse deleteUser(Integer id) {
 
-        User user = userRepository.findById(id).orElse(null);
-        if(user == null) {
-            throw new ResourceNotFoundException("client", "id", id);
-        }
+        User user = userRepository.findById(id).orElseThrow( () -> new ResourceNotFoundException("user", "id", id) );
         userRepository.delete(user);
-        return user;
+        return UserResponse.builder()
+                .message("user deleted")
+                .response(user)
+                .status_code(204)
+                .build();
     }
 
     @Override

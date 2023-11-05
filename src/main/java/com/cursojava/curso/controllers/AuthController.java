@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
     private final AuthService authService;
 
     @PostMapping(value = "login")

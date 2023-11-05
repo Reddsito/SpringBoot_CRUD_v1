@@ -1,8 +1,8 @@
 package com.cursojava.curso.services;
 
-import com.cursojava.curso.Repository.UserRepository;
+import com.cursojava.curso.models.payload.UserResponse;
+import com.cursojava.curso.repository.UserRepository;
 import com.cursojava.curso.models.dto.ResponseUserDto;
-import com.cursojava.curso.models.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,8 +39,8 @@ class UserServiceTest {
     @DisplayName("Prueba de obtención de información de un user enviando un nombre válido")
     public void findByNameShouldFound() {
         String userName = "Enrique";
-        ResponseUserDto user = userService.findByName(userName).get();
-        assertEquals(userName, user.getName());
+        UserResponse user = userService.findByName(userName);
+        assertEquals(userName, user.getResponse());
         System.out.println("user = " + user);
 
     }

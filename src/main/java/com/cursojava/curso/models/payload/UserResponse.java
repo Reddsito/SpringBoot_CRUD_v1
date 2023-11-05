@@ -5,19 +5,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
-import java.util.Date;
-
 @Data
 @NoArgsConstructor
 @Builder
-public class MessageResponse {
+public class UserResponse {
     private String message;
     private Object response;
-    private HttpStatus status_code;
+    private Object errors;
+    private Integer status_code;
 
-    public MessageResponse(String message, Object response, HttpStatus status_code) {
+    public UserResponse(String message, Object response, Object errors, Integer status_code) {
         this.message = message;
         this.response = response;
+        this.errors = errors;
         this.status_code = status_code;
     }
 }

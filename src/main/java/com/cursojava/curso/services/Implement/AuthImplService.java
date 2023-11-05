@@ -1,8 +1,7 @@
 package com.cursojava.curso.services.Implement;
 
-import com.cursojava.curso.Repository.UserRepository;
+import com.cursojava.curso.repository.UserRepository;
 import com.cursojava.curso.configuration.jwt.JwtService;
-import com.cursojava.curso.configuration.jwt.JwtServiceImpl;
 import com.cursojava.curso.models.dto.LoginRequestDto;
 import com.cursojava.curso.models.dto.RegisterRequestDto;
 import com.cursojava.curso.models.entity.User;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

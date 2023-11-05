@@ -1,11 +1,10 @@
-package com.cursojava.curso.Repository;
+package com.cursojava.curso.repository;
 
 import com.cursojava.curso.models.dto.ResponseUserDto;
 import com.cursojava.curso.models.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
